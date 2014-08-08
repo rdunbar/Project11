@@ -7,43 +7,44 @@
 package test.java;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.io.PrintStream;
 import main.java.project.e11.Project11;
 import org.junit.After;
-import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
  * @author robert
  */
 public class Project11Test {
-    
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    
+
+    /**
+     * Read from command line.
+     */
+    private final ByteArrayOutputStream out;
+
+    /**
+     * Constructor.
+     */
     public Project11Test() {
+        out = new ByteArrayOutputStream();
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
+    /**
+     * Set up system output.
+     */
     @Before
-    public void setUp() {
+    public final void setUp() {
         System.setOut(new PrintStream(out));
     }
-    
+
+    /**
+     * Pull down system output.
+     */
     @After
-    public void tearDown() {
+    public final void tearDown() {
         System.setOut(null);
     }
 
@@ -51,30 +52,40 @@ public class Project11Test {
      * Test of main method, of class Project11.
      */
     @Test
-    public void testMainWithNoArgs() {
+    public final void testMainWithNoArgs() {
         String[] args = {};
         Project11.main(args);
-        assertTrue(out.toString().matches("Invalid number of arguments\n"));
+        Assert.assertTrue(
+                out.toString().matches("Invalid number of arguments\n"));
     }
-    
+
+    /**
+     * Test normal operation.
+     */
     @Test
-    public void testCorrectOperation() {
+    public final void testCorrectOperation() {
         String[] args = {"src/test/resources/Input", "20"};
         Project11.main(args);
-        assertEquals("70600674\n", out.toString());
+        Assert.assertEquals("70600674\n", out.toString());
     }
-    
+
+    /**
+     * Input number doesn't match file.
+     */
     @Test
-    public void testArrayEntrySizeTooSmall() {
+    public final void testArrayEntrySizeTooSmall() {
         String[] args = {"src/test/resources/Input", "19"};
         Project11.main(args);
-        assertEquals("Error reading file\n", out.toString());
+        Assert.assertEquals("Error reading file\n", out.toString());
     }
-    
+
+    /**
+     * Input number doesn't match file.
+     */
     @Test
-    public void testArrayEntrySizeTooBig() {
+    public final void testArrayEntrySizeTooBig() {
         String[] args = {"src/test/resources/Input", "21"};
         Project11.main(args);
-        assertEquals("Error reading file\n", out.toString());
+        Assert.assertEquals("Error reading file\n", out.toString());
     }
 }
