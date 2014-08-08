@@ -23,25 +23,25 @@ public class Project11Test {
     /**
      * Read from command line.
      */
-    private final ByteArrayOutputStream out;
+    private final ByteArrayOutputStream _out;
 
     /**
      * Constructor.
      */
     public Project11Test() {
-        out = new ByteArrayOutputStream();
+        _out = new ByteArrayOutputStream();
     }
 
     /**
-     * Set up system output.
+     * Set up system _output.
      */
     @Before
     public final void setUp() {
-        System.setOut(new PrintStream(out));
+        System.setOut(new PrintStream(_out));
     }
 
     /**
-     * Pull down system output.
+     * Pull down system _output.
      */
     @After
     public final void tearDown() {
@@ -56,7 +56,7 @@ public class Project11Test {
         String[] args = {};
         Project11.main(args);
         Assert.assertTrue(
-                out.toString().matches("Invalid number of arguments\n"));
+                _out.toString().matches("Invalid number of arguments\n"));
     }
 
     /**
@@ -66,7 +66,7 @@ public class Project11Test {
     public final void testCorrectOperation() {
         String[] args = {"src/test/resources/Input", "20"};
         Project11.main(args);
-        Assert.assertEquals("70600674\n", out.toString());
+        Assert.assertEquals("70600674\n", _out.toString());
     }
 
     /**
@@ -76,7 +76,7 @@ public class Project11Test {
     public final void testArrayEntrySizeTooSmall() {
         String[] args = {"src/test/resources/Input", "19"};
         Project11.main(args);
-        Assert.assertEquals("Error reading file\n", out.toString());
+        Assert.assertEquals("Error reading file\n", _out.toString());
     }
 
     /**
@@ -86,6 +86,6 @@ public class Project11Test {
     public final void testArrayEntrySizeTooBig() {
         String[] args = {"src/test/resources/Input", "21"};
         Project11.main(args);
-        Assert.assertEquals("Error reading file\n", out.toString());
+        Assert.assertEquals("Error reading file\n", _out.toString());
     }
 }

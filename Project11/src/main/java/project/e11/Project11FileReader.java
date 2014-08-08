@@ -19,13 +19,13 @@ public class Project11FileReader {
 
     /**
      * Constructor.
-     * @param fname file address
-     * @param sze size of array to be processed
+     * @param fname_ file address
+     * @param sze_ _size of array to be processed
      */
-    public Project11FileReader(final String fname, final int sze) {
-        this.filename = fname;
-        this.size = sze;
-        this.digits = new int[size][size];
+    public Project11FileReader(final String fname_, final int sze_) {
+        this._filename = fname_;
+        this._size = sze_;
+        this._digits = new int[_size][_size];
     }
 
     /**
@@ -38,34 +38,34 @@ public class Project11FileReader {
         boolean errorCheck = true;
 
         try {
-            input = new BufferedReader(new FileReader(filename));
+            input = new BufferedReader(new FileReader(_filename));
 
             String line;
             int lineNumber = 0;
             StringTokenizer st;
             String token;
             while ((line = input.readLine()) != null) {
-                if (lineNumber == size) {
+                if (lineNumber == _size) {
                     errorCheck = false;
                     break;
                 }
                 st = new StringTokenizer(line);
                 int i = 0;
                 while (st.hasMoreElements()) {
-                    if (i == size) {
+                    if (i == _size) {
                         errorCheck = false;
                         break;
                     }
-                    digits[lineNumber][i] = Integer.parseInt(st.nextToken());
+                    _digits[lineNumber][i] = Integer.parseInt(st.nextToken());
                     i++;
                 }
-                if (i != size) {
+                if (i != _size) {
                     errorCheck = false;
                     break;
                 }
                 lineNumber++;
             }
-            if (lineNumber != size) {
+            if (lineNumber != _size) {
                 errorCheck = false;
             }
 
@@ -80,22 +80,22 @@ public class Project11FileReader {
 
     /**
      * Returns array read from file.
-     * @return digits array
+     * @return _digits array
      */
     final int[][] getDigits() {
-        return digits;
+        return _digits;
     }
 
     /**
      * Location of file to read.
      */
-    private final String filename;
+    private final String _filename;
     /**
      * Array build from file.
      */
-    private final int[][] digits;
+    private final int[][] _digits;
     /**
      * Size of array to read.
      */
-    private final int size;
+    private final int _size;
 }
