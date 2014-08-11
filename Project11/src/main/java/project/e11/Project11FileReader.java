@@ -6,9 +6,10 @@
 package main.java.project.e11;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /**
@@ -38,7 +39,7 @@ public class Project11FileReader {
         boolean errorCheck = true;
 
         try {
-            input = new BufferedReader(new FileReader(_filename));
+            input = new BufferedReader(new InputStreamReader(new FileInputStream(_filename), "US-ASCII"));
 
             String line;
             int lineNumber = 0;
