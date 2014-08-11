@@ -8,6 +8,7 @@ package test.java;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 import main.java.project.e11.Project11;
 import org.junit.After;
 import org.junit.Assert;
@@ -34,10 +35,11 @@ public class Project11Test {
 
     /**
      * Set up system _output.
+     * @throws UnsupportedEncodingException ex
      */
     @Before
-    public final void setUp() {
-        System.setOut(new PrintStream(_out));
+    public final void setUp() throws UnsupportedEncodingException {
+        System.setOut(new PrintStream(_out, false, "US-ASCII"));
     }
 
     /**
@@ -50,42 +52,46 @@ public class Project11Test {
 
     /**
      * Test of main method, of class Project11.
+     * @throws UnsupportedEncodingException ex
      */
     @Test
-    public final void testMainWithNoArgs() {
+    public final void testMainWithNoArgs() throws UnsupportedEncodingException {
         String[] args = {};
         Project11.main(args);
         Assert.assertTrue(
-                _out.toString().matches("Invalid number of arguments\n"));
+                _out.toString("US-ASCII").matches("Invalid number of arguments\n"));
     }
 
     /**
      * Test normal operation.
+     * @throws UnsupportedEncodingException ex
      */
     @Test
-    public final void testCorrectOperation() {
+    public final void testCorrectOperation() throws UnsupportedEncodingException {
         String[] args = {"src/test/resources/Input", "20"};
         Project11.main(args);
-        Assert.assertEquals("70600674\n", _out.toString());
+        Assert.assertEquals("70600674\n", _out.toString("US-ASCII"));
     }
 
     /**
      * Input number doesn't match file.
+     * @throws UnsupportedEncodingException ex
      */
     @Test
-    public final void testArrayEntrySizeTooSmall() {
+    public final void testArrayEntrySizeTooSmall() throws UnsupportedEncodingException {
         String[] args = {"src/test/resources/Input", "19"};
         Project11.main(args);
-        Assert.assertEquals("Error reading file\n", _out.toString());
+        Assert.assertEquals("Error reading file\n", _out.toString("US-ASCII"));
     }
 
     /**
      * Input number doesn't match file.
+     * @throws UnsupportedEncodingException ex
      */
     @Test
-    public final void testArrayEntrySizeTooBig() {
+    public final void testArrayEntrySizeTooBig() throws UnsupportedEncodingException {
         String[] args = {"src/test/resources/Input", "21"};
         Project11.main(args);
-        Assert.assertEquals("Error reading file\n", _out.toString());
+        Assert.assertEquals("Error reading file\n", _out.toString("US-ASCII"));
     }
 }
