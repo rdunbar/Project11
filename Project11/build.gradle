@@ -6,10 +6,10 @@ apply plugin: 'java'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 
-test.dependsOn 'cleanTest'
-
-findbugs {
-    ignoreFailures = true
+jar {
+    manifest {
+        attributes 'Main-Class': 'main.java.project.e11.Project11'
+    }
 }
 
 dependencies {
